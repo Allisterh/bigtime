@@ -3,7 +3,6 @@
 \docType{package}
 \name{bigtime}
 \alias{bigtime}
-\alias{bigtime-package}
 \title{bigtime: A package for obtaining sparse estimates of large time series models.}
 \description{
 The bigtime package provides sparse estimators for three large time series models:
@@ -16,21 +15,26 @@ To use the facilities of this package, start with a T by k time series matrix Y 
 Run \link{sparseVAR}, \link{sparseVARX} or \link{sparseVARMA} to get the estimated model.
 The function \link{lagmatrix} returns the lag matrix of estimated coefficients of the estimated model.
 The function \link{directforecast} gives h-step ahead forecasts based on the estimated model.
+The function \link{recursiveforecast} can be used to recursively forecast a VAR model.
+The function \link{is.stable} returns whether an estimated VAR model is stable.
+The function \link{diagnostics_plot} returns a plot of the fitted vs. observed values as well as of the residuals. 
+The functions \link{fitted} and \link{residuals} return the fitted, respectively the residuals of the estimated model.
+The function \link{simVAR} can be used to simulate a VAR model with various sparsity patterns.
 }
 \examples{
 # Fit a sparse VAR model
-data(Y)
-VARfit <- sparseVAR(Y) # sparse VAR
-Lhat <- lagmatrix(fit=VARfit, model="VAR") # get estimated lagmatrix
-VARforecast <- directforecast(fit=VARfit, model="VAR", h=1) # get one-step ahead forecasts
+data(var.example)
+VARfit <- sparseVAR(Y=scale(Y.var), selection = "cv") # using time series cross-validation
+Lhat <- lagmatrix(fit=VARfit) # get estimated lagmatrix
+VARforecast <- directforecast(fit=VARfit, h=1) # get one-step ahead forecasts
 }
 \references{
-Nicholson William B., Bien Jacob and Matteson David S. (2017), "High Dimensional Forecasting via Interpretable Vector Autoregression"
-arXiv preprint <arXiv:1412.5250v2>.
+Nicholson William B., Wilms Ines, Bien Jacob and Matteson David S. (2020), “High-dimensional forecasting via
+interpretable vector autoregression”, Journal of Machine Learning Research, 21(166), 1-52.
 
-Wilms Ines, Sumanta Basu, Bien Jacob and Matteson David S. (2017), "Sparse Identification and Estimation of High-Dimensional Vector AutoRegressive Moving Averages"
-arXiv preprint <arXiv:1707.09208>.
+Wilms Ines, Sumanta Basu, Bien Jacob and Matteson David S. (2021), “Sparse Identification and
+Estimation of Large-Scale Vector AutoRegressive Moving Averages”, Journal of the American Statistical Association, doi: 10.1080/01621459.2021.1942013.
 }
 \author{
-Ines Wilms <ines.wilms@kuleuven.be>, Jacob Bien, David S. Matteson, Sumanta Basu
+Ines Wilms <i.wilms@maastrichtuniversity.nl>, Jacob Bien, David S. Matteson, Sumanta Basu, Will Nicholson, Enrico Wegner
 }

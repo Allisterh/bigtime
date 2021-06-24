@@ -4,8 +4,18 @@
 \alias{sparseVAR}
 \title{Sparse Estimation of the Vector AutoRegressive (VAR) Model}
 \usage{
-sparseVAR(Y, p = NULL, VARpen = "HLag", VARlseq = NULL, VARgran = NULL,
-  VARalpha = 0, cvcut = 0.9, h = 1, eps = 0.001)
+sparseVAR(
+  Y,
+  p = NULL,
+  VARpen = "HLag",
+  VARlseq = NULL,
+  VARgran = NULL,
+  selection = c("none", "cv", "bic", "aic", "hq"),
+  cvcut = 0.9,
+  h = 1,
+  eps = 0.001,
+  check_std = TRUE
+)
 }
 \arguments{
 \item{Y}{A \eqn{T} by \eqn{k} matrix of time series. If k=1, a univariate autoregressive model is estimated.}
@@ -20,13 +30,15 @@ its own grid. Supplying a grid of values overrides this. WARNING: use with care.
 \item{VARgran}{User-specified vector of granularity specifications for the penalty parameter grid:  First element specifies
 how deep the grid should be constructed. Second element specifies how many values the grid should contain.}
 
-\item{VARalpha}{a small positive regularization parameter value corresponding to squared Frobenius penalty. The default is zero.}
+\item{selection}{One of "none" (default), "cv" (Time Series Cross-Validation), "bic", "aic", "hq". Used to select the optimal penalization.}
 
-\item{cvcut}{Proportion of observations used for model estimation in the time series cross-validation procedure. The remainder is used for forecast evaluation.}
+\item{cvcut}{Proportion of observations used for model estimation in the time series cross-validation procedure. The remainder is used for forecast evaluation. Redundant if selection is not "cv".}
 
 \item{h}{Desired forecast horizon in time-series cross-validation procedure.}
 
 \item{eps}{a small positive numeric value giving the tolerance for convergence in the proximal gradient algorithm.}
+
+\item{check_std}{Check whether data is standardised. Default is TRUE and is not recommended to be changed}
 }
 \value{
 A list with the following components
@@ -35,19 +47,25 @@ A list with the following components
 \item{p}{Maximum autoregressive lag order of the VAR.}
 \item{Phihat}{Matrix of estimated autoregressive coefficients of the VAR.}
 \item{phi0hat}{vector of VAR intercepts.}
+\item{series_names}{names of time series}
+\item{lambdas}{sparsity parameter grid}
+\item{MSFEcv}{MSFE cross-validation scores for each value of the sparsity parameter in the considered grid}
+\item{MSFEcv_all}{MSFE cross-validation full output}
+\item{lambda_opt}{Optimal value of the sparsity parameter as selected by the time-series cross-validation procedure}
+\item{lambda_SEopt}{Optimal value of the sparsity parameter as selected by the time-series cross-validation
+      procedure and after applying the one-standard-error rule.  This is the value used.}
+\item{h}{Forecast horizon h}
 }
 \description{
 Sparse Estimation of the Vector AutoRegressive (VAR) Model
 }
 \examples{
-data(Y)
-VARfit <- sparseVAR(Y) # sparse VAR
-y <- matrix(Y[,1], ncol=1)
-ARfit <- sparseVAR(y) # sparse AR
+data(var.example)
+VARfit <- sparseVAR(Y = scale(Y.var)) # sparse VAR
+ARfit <- sparseVAR(Y=scale(Y.var[,2])) # sparse AR
 }
 \references{
-Nicholson William B., Bien Jacob and Matteson David S. (2017), "High Dimensional Forecasting via Interpretable Vector Autoregression"
-arXiv preprint <arXiv:1412.5250v2>.
+Nicholson William B., Wilms Ines, Bien Jacob and Matteson David S. (2020), “High-dimensional forecasting via interpretable vector autoregression”, Journal of Machine Learning Research, 21(166), 1-52.
 }
 \seealso{
 \link{lagmatrix} and \link{directforecast}

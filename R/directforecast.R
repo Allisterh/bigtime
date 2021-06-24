@@ -1,18 +1,26 @@
 
 #' Function to obtain h-step ahead direct forecast based on estimated VAR, VARX or VARMA model
 #' @param fit Fitted sparse VAR, VARX or VARMA model.
-#' @param model Type of model that was estimated: VAR, VARX or VARMA.
-#' @param h Desired forecast horizon.
+#' @param h Desired forecast horizon. Default is h=1.
 #' @export
 #' @return Vector of length k containing the h-step ahead forecasts for the k time series.
 #' @examples
-#' data(Y)
-#' VARfit <- sparseVAR(Y) # sparse VAR
-#' VARforecast <- directforecast(fit=VARfit, model="VAR", h=1)
-directforecast <- function(fit, model, h=1){
+#' data(var.example)
+#' VARfit <- sparseVAR(Y=scale(Y.var), selection = "cv") # sparse VAR
+#' VARforecast <- directforecast(fit=VARfit, h=1)
+directforecast <- function(fit, h=1){
+
+  model <- "none"
+  if ("bigtime.VAR" %in% class(fit)) model <- "VAR"
+  if ("bigtime.VARX" %in% class(fit)) model <- "VARX"
+  if ("bigtime.VARMA" %in% class(fit)) model <- "VARMA"
 
   if(h<=0){
     stop("Forecast horizon h must be a strictly positive integer.")
+  }
+
+  if(fit$h!=h){
+    stop("Specify the same forecast horizon h as argument in the sparseVAR, sparseVARX, or sparseVARMA function and the directforecast function")
   }
 
   if(!is.element(model, c("VAR", "VARX", "VARMA"))){
@@ -23,6 +31,21 @@ directforecast <- function(fit, model, h=1){
   k <- ncol(fit$Y)
 
   if(model=="VAR"){
+
+    # We need to catch the situation in which no selection was done
+    if (fit$selection == "none"){
+      fcst <- array(dim = c(1, ncol(fit$Y), length(fit$lambdas)))
+      for (i in 1:length(fit$lambdas)){
+        mod_tmp <- fit
+        mod_tmp$selection <- "tmp"
+        mod_tmp$Phihat <- fit$Phihat[, , i]
+        mod_tmp$phi0hat <- fit$phi0hat[, , i]
+        fcst[, , i] <- directforecast(mod_tmp, h = h)
+      }
+      return(fcst)
+    }
+
+
     Y <- fit$Y
     p <- fit$p
     Phi <- fit$Phihat
@@ -68,6 +91,19 @@ directforecast <- function(fit, model, h=1){
       Theta <- fit$Bhat
       phi0 <- fit$phi0hat
 
+      if (fit$selection == "none"){
+        dir_fcst <- array(dim = c(1, ncol(Y), dim(Phi)[3]))
+        for (i in 1:dim(Phi)[3]){
+          mod_tmp <- fit
+          mod_tmp$Phihat <- fit$Phihat[,,i]
+          mod_tmp$phi0hat <- fit$phi0hat[,,i]
+          mod_tmp$Bhat <- fit$Bhat[,,i]
+          mod_tmp$selection = "tmp"
+          dir_fcst[,,i] <- directforecast(mod_tmp, h = h)
+        }
+        return(dir_fcst)
+      }
+
       if(is.null(Phi) | is.null(Theta) | is.null(phi0)){
         stop("Please provide a fitted VARX model")
       }
@@ -83,11 +119,26 @@ directforecast <- function(fit, model, h=1){
       Theta <- fit$Thetahat
       phi0 <- fit$phi0hat
 
+      if (fit$VARMAselection == "none"){
+        # If no selection was done, then fitted values are tensors
+        dir_fcst <- array(dim = c(1, ncol(Y), dim(Phi)[3]))
+        for (i in 1:length(fit$PhaseII_lambdaPhi)){
+          mod_tmp <- fit
+          mod_tmp$Phihat <- fit$Phihat[, , i]
+          mod_tmp$Thetahat <- fit$Thetahat[, , i]
+          mod_tmp$phi0hat <- fit$phi0hat[, , i]
+          mod_tmp$VARMAselection <- "tmp"
+          dir_fcst[, , i] <- directforecast(mod_tmp, h = h)
+        }
+        return(dir_fcst)
+      }
+
       if(is.null(Phi) | is.null(Theta) | is.null(phi0)){
         stop("Please provide a fitted VARMA model")
       }
 
     }
+
     VARXFIT <- HVARXmodelFORECAST(Y=Y, X=U, p=p, s=q, h=h)
 
     if(k==1){

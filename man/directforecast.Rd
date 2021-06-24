@@ -4,14 +4,12 @@
 \alias{directforecast}
 \title{Function to obtain h-step ahead direct forecast based on estimated VAR, VARX or VARMA model}
 \usage{
-directforecast(fit, model, h = 1)
+directforecast(fit, h = 1)
 }
 \arguments{
 \item{fit}{Fitted sparse VAR, VARX or VARMA model.}
 
-\item{model}{Type of model that was estimated: VAR, VARX or VARMA.}
-
-\item{h}{Desired forecast horizon.}
+\item{h}{Desired forecast horizon. Default is h=1.}
 }
 \value{
 Vector of length k containing the h-step ahead forecasts for the k time series.
@@ -20,7 +18,7 @@ Vector of length k containing the h-step ahead forecasts for the k time series.
 Function to obtain h-step ahead direct forecast based on estimated VAR, VARX or VARMA model
 }
 \examples{
-data(Y)
-VARfit <- sparseVAR(Y) # sparse VAR
-VARforecast <- directforecast(fit=VARfit, model="VAR", h=1)
+data(var.example)
+VARfit <- sparseVAR(Y=scale(Y.var), selection = "cv") # sparse VAR
+VARforecast <- directforecast(fit=VARfit, h=1)
 }

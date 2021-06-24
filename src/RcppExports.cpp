@@ -117,6 +117,197 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// gamloopElem2
+arma::cube gamloopElem2(arma::cube& bcube, const arma::mat& Y, const arma::mat& Z, arma::colvec gammgrid, const double eps, const arma::colvec YMean2, const arma::colvec ZMean2, arma::mat& B1, const int k, const int p, const double tk, const int flag_restart_opt);
+RcppExport SEXP _bigtime_gamloopElem2(SEXP bcubeSEXP, SEXP YSEXP, SEXP ZSEXP, SEXP gammgridSEXP, SEXP epsSEXP, SEXP YMean2SEXP, SEXP ZMean2SEXP, SEXP B1SEXP, SEXP kSEXP, SEXP pSEXP, SEXP tkSEXP, SEXP flag_restart_optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::cube& >::type bcube(bcubeSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< arma::colvec >::type gammgrid(gammgridSEXP);
+    Rcpp::traits::input_parameter< const double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec >::type YMean2(YMean2SEXP);
+    Rcpp::traits::input_parameter< const arma::colvec >::type ZMean2(ZMean2SEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type B1(B1SEXP);
+    Rcpp::traits::input_parameter< const int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const double >::type tk(tkSEXP);
+    Rcpp::traits::input_parameter< const int >::type flag_restart_opt(flag_restart_optSEXP);
+    rcpp_result_gen = Rcpp::wrap(gamloopElem2(bcube, Y, Z, gammgrid, eps, YMean2, ZMean2, B1, k, p, tk, flag_restart_opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gamloopFista2
+arma::cube gamloopFista2(arma::cube bcube, const arma::mat& Y, const arma::mat& Z, const arma::colvec gammgrid, const double eps, const arma::colvec& YMean2, const arma::colvec& ZMean2, arma::mat& B1, int k, int p, double tk);
+RcppExport SEXP _bigtime_gamloopFista2(SEXP bcubeSEXP, SEXP YSEXP, SEXP ZSEXP, SEXP gammgridSEXP, SEXP epsSEXP, SEXP YMean2SEXP, SEXP ZMean2SEXP, SEXP B1SEXP, SEXP kSEXP, SEXP pSEXP, SEXP tkSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::cube >::type bcube(bcubeSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec >::type gammgrid(gammgridSEXP);
+    Rcpp::traits::input_parameter< const double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type YMean2(YMean2SEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type ZMean2(ZMean2SEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type B1(B1SEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type tk(tkSEXP);
+    rcpp_result_gen = Rcpp::wrap(gamloopFista2(bcube, Y, Z, gammgrid, eps, YMean2, ZMean2, B1, k, p, tk));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lassoVARFistcpp
+arma::cube lassoVARFistcpp(const arma::cube& beta, const arma::mat& trainY, const arma::mat& trainZ, const arma::colvec& lambda, const double& tol, const int& p);
+RcppExport SEXP _bigtime_lassoVARFistcpp(SEXP betaSEXP, SEXP trainYSEXP, SEXP trainZSEXP, SEXP lambdaSEXP, SEXP tolSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::cube& >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type trainY(trainYSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type trainZ(trainZSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< const double& >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< const int& >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(lassoVARFistcpp(beta, trainY, trainZ, lambda, tol, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HVARElemAlgcpp
+arma::cube HVARElemAlgcpp(const arma::cube& beta, const arma::mat& trainY, const arma::mat& trainZ, const arma::colvec& lambda, const double& tol, const int& p, const int flag_restart_opt);
+RcppExport SEXP _bigtime_HVARElemAlgcpp(SEXP betaSEXP, SEXP trainYSEXP, SEXP trainZSEXP, SEXP lambdaSEXP, SEXP tolSEXP, SEXP pSEXP, SEXP flag_restart_optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::cube& >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type trainY(trainYSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type trainZ(trainZSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< const double& >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< const int& >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const int >::type flag_restart_opt(flag_restart_optSEXP);
+    rcpp_result_gen = Rcpp::wrap(HVARElemAlgcpp(beta, trainY, trainZ, lambda, tol, p, flag_restart_opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HVAR_cvaux_loop_cpp
+Rcpp::List HVAR_cvaux_loop_cpp(const arma::mat& Y, const arma::mat& Z, const arma::colvec& tseq, const arma::colvec& gamm, const double eps, int p, const double estim);
+RcppExport SEXP _bigtime_HVAR_cvaux_loop_cpp(SEXP YSEXP, SEXP ZSEXP, SEXP tseqSEXP, SEXP gammSEXP, SEXP epsSEXP, SEXP pSEXP, SEXP estimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type tseq(tseqSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type gamm(gammSEXP);
+    Rcpp::traits::input_parameter< const double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const double >::type estim(estimSEXP);
+    rcpp_result_gen = Rcpp::wrap(HVAR_cvaux_loop_cpp(Y, Z, tseq, gamm, eps, p, estim));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HVARX_NEW_export_cpp
+Rcpp::List HVARX_NEW_export_cpp(const arma::mat& fullY, const arma::mat& fullZ, const arma::mat& fullX, const int& k, const int& kX, const int& p, const int& s, const double& lambdaPhi, const double& lambdaB, const double& eps, const double& max_iter, const double& alpha, const int& type, const arma::mat& Binit, const arma::mat& Phiinit);
+RcppExport SEXP _bigtime_HVARX_NEW_export_cpp(SEXP fullYSEXP, SEXP fullZSEXP, SEXP fullXSEXP, SEXP kSEXP, SEXP kXSEXP, SEXP pSEXP, SEXP sSEXP, SEXP lambdaPhiSEXP, SEXP lambdaBSEXP, SEXP epsSEXP, SEXP max_iterSEXP, SEXP alphaSEXP, SEXP typeSEXP, SEXP BinitSEXP, SEXP PhiinitSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type fullY(fullYSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type fullZ(fullZSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type fullX(fullXSEXP);
+    Rcpp::traits::input_parameter< const int& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const int& >::type kX(kXSEXP);
+    Rcpp::traits::input_parameter< const int& >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const int& >::type s(sSEXP);
+    Rcpp::traits::input_parameter< const double& >::type lambdaPhi(lambdaPhiSEXP);
+    Rcpp::traits::input_parameter< const double& >::type lambdaB(lambdaBSEXP);
+    Rcpp::traits::input_parameter< const double& >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< const double& >::type max_iter(max_iterSEXP);
+    Rcpp::traits::input_parameter< const double& >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const int& >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Binit(BinitSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Phiinit(PhiinitSEXP);
+    rcpp_result_gen = Rcpp::wrap(HVARX_NEW_export_cpp(fullY, fullZ, fullX, k, kX, p, s, lambdaPhi, lambdaB, eps, max_iter, alpha, type, Binit, Phiinit));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HVARX_cvaux_cpp_loop
+Rcpp::List HVARX_cvaux_cpp_loop(const arma::mat& Y, const arma::mat& Z, const arma::mat& X, const arma::colvec& lambdaPhiseq, const arma::colvec& lambdaBseq, const double eps, const double max_iter, int k, int kX, int p, int s, const double alpha, const double estim, const arma::colvec& tseq);
+RcppExport SEXP _bigtime_HVARX_cvaux_cpp_loop(SEXP YSEXP, SEXP ZSEXP, SEXP XSEXP, SEXP lambdaPhiseqSEXP, SEXP lambdaBseqSEXP, SEXP epsSEXP, SEXP max_iterSEXP, SEXP kSEXP, SEXP kXSEXP, SEXP pSEXP, SEXP sSEXP, SEXP alphaSEXP, SEXP estimSEXP, SEXP tseqSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type lambdaPhiseq(lambdaPhiseqSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type lambdaBseq(lambdaBseqSEXP);
+    Rcpp::traits::input_parameter< const double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< const double >::type max_iter(max_iterSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type kX(kXSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< int >::type s(sSEXP);
+    Rcpp::traits::input_parameter< const double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const double >::type estim(estimSEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type tseq(tseqSEXP);
+    rcpp_result_gen = Rcpp::wrap(HVARX_cvaux_cpp_loop(Y, Z, X, lambdaPhiseq, lambdaBseq, eps, max_iter, k, kX, p, s, alpha, estim, tseq));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LGSearch_cpp
+double LGSearch_cpp(double gstart, arma::mat& Y, arma::mat& Z, arma::cube beta, int estim, int k, int p);
+RcppExport SEXP _bigtime_LGSearch_cpp(SEXP gstartSEXP, SEXP YSEXP, SEXP ZSEXP, SEXP betaSEXP, SEXP estimSEXP, SEXP kSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type gstart(gstartSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< int >::type estim(estimSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(LGSearch_cpp(gstart, Y, Z, beta, estim, k, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// recursiveforecast_cpp
+arma::mat recursiveforecast_cpp(arma::vec& inity, arma::mat& FF, arma::vec& c, int h);
+RcppExport SEXP _bigtime_recursiveforecast_cpp(SEXP initySEXP, SEXP FFSEXP, SEXP cSEXP, SEXP hSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec& >::type inity(initySEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type FF(FFSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type c(cSEXP);
+    Rcpp::traits::input_parameter< int >::type h(hSEXP);
+    rcpp_result_gen = Rcpp::wrap(recursiveforecast_cpp(inity, FF, c, h));
+    return rcpp_result_gen;
+END_RCPP
+}
+// simVAR_cpp
+arma::mat simVAR_cpp(int periods, int k, int p, arma::mat& coef_mat, arma::vec& c, arma::mat& e, arma::vec& init_y, int burnin);
+RcppExport SEXP _bigtime_simVAR_cpp(SEXP periodsSEXP, SEXP kSEXP, SEXP pSEXP, SEXP coef_matSEXP, SEXP cSEXP, SEXP eSEXP, SEXP init_ySEXP, SEXP burninSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type periods(periodsSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type coef_mat(coef_matSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type c(cSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type e(eSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type init_y(init_ySEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    rcpp_result_gen = Rcpp::wrap(simVAR_cpp(periods, k, p, coef_mat, c, e, init_y, burnin));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_bigtime_norm2", (DL_FUNC) &_bigtime_norm2, 1},
@@ -126,6 +317,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_bigtime_ST1a", (DL_FUNC) &_bigtime_ST1a, 2},
     {"_bigtime_ST3a", (DL_FUNC) &_bigtime_ST3a, 2},
     {"_bigtime_gamloopFista", (DL_FUNC) &_bigtime_gamloopFista, 13},
+    {"_bigtime_gamloopElem2", (DL_FUNC) &_bigtime_gamloopElem2, 12},
+    {"_bigtime_gamloopFista2", (DL_FUNC) &_bigtime_gamloopFista2, 11},
+    {"_bigtime_lassoVARFistcpp", (DL_FUNC) &_bigtime_lassoVARFistcpp, 6},
+    {"_bigtime_HVARElemAlgcpp", (DL_FUNC) &_bigtime_HVARElemAlgcpp, 7},
+    {"_bigtime_HVAR_cvaux_loop_cpp", (DL_FUNC) &_bigtime_HVAR_cvaux_loop_cpp, 7},
+    {"_bigtime_HVARX_NEW_export_cpp", (DL_FUNC) &_bigtime_HVARX_NEW_export_cpp, 15},
+    {"_bigtime_HVARX_cvaux_cpp_loop", (DL_FUNC) &_bigtime_HVARX_cvaux_cpp_loop, 14},
+    {"_bigtime_LGSearch_cpp", (DL_FUNC) &_bigtime_LGSearch_cpp, 7},
+    {"_bigtime_recursiveforecast_cpp", (DL_FUNC) &_bigtime_recursiveforecast_cpp, 4},
+    {"_bigtime_simVAR_cpp", (DL_FUNC) &_bigtime_simVAR_cpp, 8},
     {NULL, NULL, 0}
 };
 

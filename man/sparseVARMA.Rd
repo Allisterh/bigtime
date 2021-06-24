@@ -4,11 +4,28 @@
 \alias{sparseVARMA}
 \title{Sparse Estimation of the Vector AutoRegressive Moving Average (VARMA) Model}
 \usage{
-sparseVARMA(Y, U = NULL, VARp = NULL, VARpen = "HLag", VARlseq = NULL,
-  VARgran = NULL, VARalpha = 0, VARMAp = NULL, VARMAq = NULL,
-  VARMApen = "HLag", VARMAlPhiseq = NULL, VARMAPhigran = NULL,
-  VARMAlThetaseq = NULL, VARMAThetagran = NULL, VARMAalpha = 0, h = 1,
-  cvcut = 0.9, eps = 10^-3)
+sparseVARMA(
+  Y,
+  U = NULL,
+  VARp = NULL,
+  VARpen = "HLag",
+  VARlseq = NULL,
+  VARgran = NULL,
+  VARselection = c("cv", "bic", "aic", "hq"),
+  VARMAp = NULL,
+  VARMAq = NULL,
+  VARMApen = "HLag",
+  VARMAlPhiseq = NULL,
+  VARMAPhigran = NULL,
+  VARMAlThetaseq = NULL,
+  VARMAThetagran = NULL,
+  VARMAalpha = 0,
+  VARMAselection = c("none", "cv", "bic", "aic", "hq"),
+  h = 1,
+  cvcut = 0.9,
+  eps = 10^-3,
+  check_std = TRUE
+)
 }
 \arguments{
 \item{Y}{A \eqn{T} by \eqn{k} matrix of time series. If k=1, a univariate autoregressive moving average model is estimated.}
@@ -25,7 +42,7 @@ its own grid. Supplying a grid of values overrides this. WARNING: use with care.
 \item{VARgran}{User-specified vector of granularity specifications for the penalty parameter grid of the PhaseI VAR:  First element specifies
 how deep the grid should be constructed. Second element specifies how many values the grid should contain.}
 
-\item{VARalpha}{a small positive regularization parameter value corresponding to squared Frobenius penalty in PhaseI VAR. The default is zero.}
+\item{VARselection}{Selection procedure for the first stage. Default is time series Cross-Validation. Alternatives are BIC, AIC, HQ}
 
 \item{VARMAp}{User-specified maximum autoregressive lag order of the VARMA. Typical usage is to have the program compute its own maximum lag order based on the time series length.}
 
@@ -47,11 +64,15 @@ how deep the grid should be constructed. Second element specifies how many value
 
 \item{VARMAalpha}{a small positive regularization parameter value corresponding to squared Frobenius penalty in  VARMA. The default is zero.}
 
+\item{VARMAselection}{selection procedure in the second stage. Default is "none"; Alternatives are cv, bic, aic, hq}
+
 \item{h}{Desired forecast horizon in time-series cross-validation procedure.}
 
 \item{cvcut}{Proportion of observations used for model estimation in the time series cross-validation procedure. The remainder is used for forecast evaluation.}
 
 \item{eps}{a small positive numeric value giving the tolerance for convergence in the proximal gradient algorithms.}
+
+\item{check_std}{Check whether data is standardised. Default is TRUE and is not recommended to be changed}
 }
 \value{
 A list with the following components
@@ -66,19 +87,32 @@ A list with the following components
 \item{Phihat}{Matrix of estimated autoregressive coefficients of the VARMA.}
 \item{Thetahat}{Matrix of estimated moving average coefficients of the VARMA.}
 \item{phi0hat}{Vector of VARMA intercepts.}
+\item{series_names}{names of time series}
+\item{PhaseI_lambas}{Phase I sparsity parameter grid}
+\item{PhaseI_MSFEcv}{MSFE cross-validation scores for each value of the sparsity parameter in the considered grid}
+\item{PhaseI_lambda_opt}{Phase I Optimal value of the sparsity parameter as selected by the time-series cross-validation procedure}
+\item{PhaseI_lambda_SEopt}{Phase I Optimal value of the sparsity parameter as selected by the time-series cross-validation procedure and after applying the one-standard-error rule}
+\item{PhaseII_lambdaPhi}{Phase II sparsity parameter grid corresponding to Phi parameters}
+\item{PhaseII_lambdaTheta}{Phase II sparsity parameter grid corresponding to Theta parameters}
+\item{PhaseII_lambdaPhi_opt}{Phase II Optimal value of the sparsity parameter (corresponding to Phi parameters) as selected by the time-series cross-validation procedure}
+\item{PhaseII_lambdaPhi_SEopt}{Phase II Optimal value of the sparsity parameter (corresponding to Theta parameters) as selected by the time-series cross-validation procedure and after applying the one-standard-error rule}
+\item{PhaseII_lambdaTheta_opt}{Phase II Optimal value of the sparsity parameter (corresponding to Phi parameters) as selected by the time-series cross-validation procedure}
+\item{PhaseII_lambdaTheta_SEopt}{Phase II Optimal value of the sparsity parameter (corresponding to Theta parameters) as selected by the time-series cross-validation procedure and after applying the one-standard-error rule}
+\item{PhaseII_MSFEcv}{Phase II MSFE cross-validation scores for each value in the two-dimensional sparsity grid}
+\item{h}{Forecast horizon h}
 }
 \description{
 Sparse Estimation of the Vector AutoRegressive Moving Average (VARMA) Model
 }
 \examples{
-data(Y)
-VARMAfit <- sparseVARMA(Y) # sparse VARMA
-y <- matrix(Y[,1], ncol=1)
-ARMAfit <- sparseVARMA(y) # sparse ARMA
+data(varma.example)
+VARMAfit <- sparseVARMA(Y = scale(Y.varma)) # sparse VARMA
+y <- matrix(Y.varma[,1], ncol=1)
+ARMAfit <- sparseVARMA(Y=scale(y)) # sparse ARMA
 }
 \references{
-Wilms Ines, Sumanta Basu, Bien Jacob and Matteson David S. (2017), "Sparse Identification and Estimation of High-Dimensional Vector AutoRegressive Moving Averages"
-arXiv preprint <arXiv:1707.09208>.
+Wilms Ines, Sumanta Basu, Bien Jacob and Matteson David S. (2021), “Sparse Identification and
+Estimation of Large-Scale Vector AutoRegressive Moving Averages”, Journal of the American Statistical Association, doi: 10.1080/01621459.2021.1942013.
 }
 \seealso{
 \link{lagmatrix} and \link{directforecast}
