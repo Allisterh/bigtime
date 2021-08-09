@@ -1,3 +1,7 @@
+# bigtime 0.2.1
+
+* Dependency on Rcpp version >=1.0.7 added to the DESCRIPTION
+
 # bigtime 0.2.0
 
 * `sparseVAR`, `sparseVARMA`, `sparseVARX` are all more efficient and faster now

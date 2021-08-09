@@ -1,6 +1,6 @@
-5a10ba2529cb67613a69f51bd61c9979 *DESCRIPTION
+f7df4747eb942c57c7a57ef21e79e968 *DESCRIPTION
 1f13b93b71cc181b7ac4bcc73fbe3120 *NAMESPACE
-99b7e0cace0822896746bca62bb9ff7d *NEWS.md
+b03c66f73b44fa5b35c1ad1934edd3a2 *NEWS.md
 b11462ffb942361ae997c8492d8440c2 *R/RcppExports.R
 fe8cdddcaf672e3dff7af1854e8189d1 *R/RtoC.R
 12ed4fbd4e5e98c7c866a5610e6bd4a6 *R/bigtime.R
@@ -89,7 +89,7 @@ ae23d0e1f1c896ea000c4f50ccd7d1b4 *man/sparseVAR.Rd
 8675d784f81146e0fa2cccc7161878fe *man/summary.bigtime.simVAR.Rd
 f90a559f6c9bd38d3ffe6063547c9915 *src/Makevars
 f0c5b5f040fc166686763619a89fe4af *src/Makevars.win
-265fb5b10d50157fc697388a73552516 *src/RcppExports.cpp
+065853a3880ea597dedda4b3a573d7fc *src/RcppExports.cpp
 4999c4b8eddc0e40ba032b988086ca93 *src/hvar.cpp
 fa22a608bad992de5e2dd9adfd9f94ad *src/recursiveforecast.cpp
 06d0e09e7a1fd9a222e7500e01c4e1cd *src/simVAR.cpp
