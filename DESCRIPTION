@@ -1,7 +1,7 @@
 Package: bigtime
 Type: Package
 Title: Sparse Estimation of Large Time Series Models
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(
     person("Ines", "Wilms", email = "i.wilms@maastrichtuniversity.nl", role = c("cre","aut")),
     person("David S.", "Matteson", email = "matteson@cornell.edu", role = "aut"),
@@ -21,7 +21,7 @@ Imports: Rcpp (>= 1.0.7), stats, utils, grDevices, graphics, corrplot,
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen
 URL: https://github.com/ineswilms/bigtime
 NeedsCompilation: yes
-Packaged: 2023-07-13 09:04:06 UTC; I.Wilms
+Packaged: 2023-08-21 16:30:57 UTC; I.Wilms
 Author: Ines Wilms [cre, aut],
   David S. Matteson [aut],
   Jacob Bien [aut],
@@ -29,4 +29,4 @@ Author: Ines Wilms [cre, aut],
   Will Nicholson [aut],
   Enrico Wegner [aut]
 Repository: CRAN
-Date/Publication: 2023-07-16 07:40:02 UTC
+Date/Publication: 2023-08-21 20:30:05 UTC

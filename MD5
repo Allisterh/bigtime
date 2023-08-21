@@ -1,9 +1,9 @@
-3379db90092e82a4a334cb0830cd73dc *DESCRIPTION
+9af9e7b86e1cea77447bd3a617c3b18e *DESCRIPTION
 1f13b93b71cc181b7ac4bcc73fbe3120 *NAMESPACE
-065ce03b09b0d5b0229eede44c9b28a0 *NEWS.md
+07333a080b975b6ff4d1fe9a88f2ceef *NEWS.md
 b11462ffb942361ae997c8492d8440c2 *R/RcppExports.R
 fe8cdddcaf672e3dff7af1854e8189d1 *R/RtoC.R
-12ed4fbd4e5e98c7c866a5610e6bd4a6 *R/bigtime.R
+3ced5fe489af3ba656e13c326b700258 *R/bigtime.R
 b1c7da3b8a9fd6882bdc045b52fb0c7e *R/dataexample.R
 707428a54a7e82aac5fae72776c514a9 *R/diagnostics.R
 a36a57ff633f50ad1e1585bb749db1a0 *R/directforecast.R
@@ -25,7 +25,7 @@ c9c0ecacdd8c03614134d5a56405ec8e *man/X.varx.Rd
 4773e2542a78def457a68dc1fffa5713 *man/Y.var.Rd
 fbdde343d26641801ce5c63208f27cb1 *man/Y.varma.Rd
 358727be8618ebc59378f7fb757d5a8c *man/Y.varx.Rd
-ed00930445354e9f77a678071fc9284c *man/bigtime.Rd
+61519dce5db013ff82bd14b1da2d10c5 *man/bigtime.Rd
 4022a2eecd424b183ba82a3db6ba427d *man/create_rand_coef_mat.Rd
 1bdfea3bd0a0c55645ca2e632147592e *man/diagnostics_plot.Rd
 4536e552e652db45d123d8f29c55ab90 *man/diagnostics_plot.bigtime.VAR.Rd
